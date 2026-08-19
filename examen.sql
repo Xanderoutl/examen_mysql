@@ -1,60 +1,53 @@
-CREATE table empleados(
-id_empleados int primary key.
-cedula int.
-nombre varchar(100)
-apellido varchar(50)
-cargo varchar(50)
 
-
+CREATE TABLE empleados (
+    id_empleados INT PRIMARY KEY,
+    cedula INT,
+    nombre VARCHAR(100),
+    apellido VARCHAR(50),
+    cargo VARCHAR(50)
 );
-
-CREATE table empleados vacacionales(
-id_empleados_vacacionales int primary key
-id_empleados int,
-id vacacionales int,
-foreign key (id_empleado)REFERENCES (empleados)
-
-
-    
-)
-
-CREATE table medicos(
-    id_medicos int primary key, 
-    cedula_medico varchar(50),
-    nombre_medico varchar(100),
-    apellido_medico varchar(50),
-    especialidad_medico varchar(100),
-    tipo_medico varchar(100),
-    dia_semana varchar int,
-    hora_ini_consulta int,
-    hora_fin_consultar int,
-
-
-
-    
+ 
+CREATE TABLE empleados_vacacionales (
+    id_empleados_vacacionales INT PRIMARY KEY,
+    id_empleados INT,
+    id_vacacionales INT,
+    FOREIGN KEY (id_empleados) REFERENCES empleados(id_empleados)
 );
-CREATE table sustituciones(
-    id_sustituto int,
-    id_medico int,
-    fecha_ini int,
-    fecha_fin int,
-    foreign key (id_medico) REFERENCES (medicos)
-
+ 
+CREATE TABLE medicos (
+    id_medicos INT PRIMARY KEY,
+    cedula_medico VARCHAR(50),
+    nombre_medico VARCHAR(100),
+    apellido_medico VARCHAR(50),
+    especialidad_medico VARCHAR(100),
+    tipo_medico VARCHAR(100),
+    dia_semana VARCHAR(20),
+    hora_ini_consulta INT,
+    hora_fin_consulta INT
 );
-CREATE table pacientes(
-    id_pacientes primary key,
-    cedula_pacientes int,
-    nombre_paciente varchar(50),
-    apellido_paciente varchar(100),
-    fecha_nacim varchar(100),
-    telefono varchar(100),
-    id_asignado int,
-    foreign key (id_medico) REFERENCES(medicos)
-
-)
-CREATE table vacaciones_medicos(
-id_medicos_vacacionales int primary key
-id_medico int,
-id vacacionales int,
-foreign key (id_medico)REFERENCES (medicos)
-)
+ 
+CREATE TABLE sustituciones (
+    id_sustituto INT PRIMARY KEY,
+    id_medico INT,
+    fecha_ini DATE,
+    fecha_fin DATE,
+    FOREIGN KEY (id_medico) REFERENCES medicos(id_medicos)
+);
+ 
+CREATE TABLE pacientes (
+    id_pacientes INT PRIMARY KEY,
+    cedula_pacientes INT,
+    nombre_paciente VARCHAR(50),
+    apellido_paciente VARCHAR(100),
+    fecha_nacim VARCHAR(100),
+    telefono VARCHAR(100),
+    id_asignado INT,
+    FOREIGN KEY (id_asignado) REFERENCES medicos(id_medicos)
+);
+ 
+CREATE TABLE vacaciones_medicos (
+    id_medicos_vacacionales INT PRIMARY KEY,
+    id_medico INT,
+    id_vacacionales INT,
+    FOREIGN KEY (id_medico) REFERENCES medicos(id_medicos)
+);
